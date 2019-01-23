@@ -1,0 +1,50 @@
+[
+    {
+        "title": "Todo",
+        "id": "todo",
+        "color": "#b2ebf2",
+        "tasks": [
+            {
+                "id": "first-task",
+                "title": "First Task",
+                "description": "This is my first task"
+            }
+        ]
+    },
+    {
+        "title": "In Progress",
+        "id": "inprogress",
+        "color": "#ffa726",
+        "tasks": [
+            {
+                "id": "second-task",
+                "title": "Second Task",
+                "description": "This is my first task"
+            }
+        ]
+    },
+    {
+        "title": "Done",
+        "id": "ddone",
+        "color": "#fff176",
+        "tasks": [
+            {
+                "id": "third-task",
+                "title": "Third Task",
+                "description": "This is my first task"
+            }
+        ]
+    },
+    {
+        "title": "QA Approved",
+        "id": "qaapproved",
+        "color": "#aed581",
+        "tasks": [
+            {
+                "id": "four-task",
+                "title": "Four Task",
+                "description": "This is my first task"
+            }
+        ]
+    }
+]

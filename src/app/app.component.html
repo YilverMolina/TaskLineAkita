@@ -1,0 +1,115 @@
+<div class="add-section">
+    <button (click)="showModal = true" class="button is-primary">Create Tasksline</button>
+</div>
+<div class="board" *ngIf="taskslines$ | async">
+<div class="card" style="width: 23.5%" [style.background-color]="line.color" *ngFor="let line of taskslines$ | async; let i=index">
+    <div style="display: flex; justify-content: space-around;">
+            <header class="card-header" style="width: 100%">
+                    <p class="card-header-title is-size-4">
+                    {{line.title}}
+                    </p>
+                    <a (click)="setSelected(line)" class="card-header-icon" aria-label="more options">
+                            <span  class="icon" >
+                                    <fa-icon [icon]="'plus'"></fa-icon>
+                                </span>
+                        </a>
+                </header>
+    </div>
+    <div class="board__card-list__content" cdkDropList [id]="line.id" [cdkDropListData]="getTaskslineData(line.tasks)" [cdkDropListConnectedTo]="taskslineIds"
+    (cdkDropListDropped)="onTaskDrop($event)">
+    <div class="card card-list-item" *ngFor="let task of line.tasks" cdkDrag>
+        <header class="card-header">
+            <p class="card-header-title">
+            {{ task.title }}
+            </p>
+        </header>
+        <div class="card-content" *ngIf="task.description">
+        <div class="content">
+            {{ task.description }}
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<div class="modal" [ngClass]="{'is-active': showModal}">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">
+                    Create a tasksline
+                </p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    <div class="field">
+                        <label class="label">Taskline id</label>
+                        <div class="control">
+                            <input [(ngModel)] ="newTasksline.id" class="input" type="text" placeholder="enter id">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Taskline title</label>
+                        <div class="control">
+                            <input [(ngModel)]="newTasksline.title"  class="input" type="text" placeholder="enter title">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Taskline color</label>
+                        <div class="control">
+                            <input [(ngModel)]="newTasksline.color" class="input" type="text" placeholder="enter hexadecimal color">
+                        </div>
+                        <p class="help">example #81d4fa</p>
+                    </div>
+                </div>
+            </div>
+            <footer class="card-footer">
+                <a (click)="saveTasksline()" class="card-footer-item">Save</a>
+            </footer>
+        </div>
+            
+    </div>
+    <button (click)="showModal = false" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<div class="modal" *ngIf="showAddTask" [ngClass]="{'is-active': showAddTask}">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        Create a new task
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <div class="field">
+                            <label class="label">Task id</label>
+                            <div class="control">
+                                <input [(ngModel)] ="newTask.id" class="input" type="text" placeholder="enter id">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Task title</label>
+                            <div class="control">
+                                <input [(ngModel)]="newTask.title"  class="input" type="text" placeholder="enter title">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Taskline color</label>
+                            <div class="control">
+                                <textarea [(ngModel)]="newTask.description" class="textarea" placeholder="enter a description">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <a (click)="saveNewTask()" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+                
+        </div>
+        <button (click)="showAddTask = false" class="modal-close is-large" aria-label="close"></button>
+    </div>
